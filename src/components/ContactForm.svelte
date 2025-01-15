@@ -1,27 +1,33 @@
 <script lang="ts">
-  // Define the type for the contact object
-  interface Contact {
-    name: string;
-    email: string;
-    phone: string;
-  }
-
-  // Props for contact and the updateContact callback
-  export let contact: Contact;
-  export let updateContact: (contact: Contact) => void;
+  export let contact: { name: string; email: string; phone: string };
 </script>
 
+<h2>Contact Information</h2>
 <div class="contact-form">
-  <input type="text" bind:value={contact.name} placeholder="Name" />
-  <input type="email" bind:value={contact.email} placeholder="Email" />
-  <input type="tel" bind:value={contact.phone} placeholder="Phone" />
-  <button on:click={() => updateContact(contact)}>Save</button>
-</div>
+  <label for="name">Name</label>
+  <input
+    id="name"
+    type="text"
+    bind:value={contact.name}
+    placeholder="Enter your name"
+    required
+  />
 
-<style>
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-</style>
+  <label for="email">Email</label>
+  <input
+    id="email"
+    type="email"
+    bind:value={contact.email}
+    placeholder="Enter your email"
+    required
+  />
+
+  <label for="phone">Phone</label>
+  <input
+    id="phone"
+    type="tel"
+    bind:value={contact.phone}
+    placeholder="Enter your phone"
+    required
+  />
+</div>

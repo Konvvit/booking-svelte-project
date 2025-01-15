@@ -1,10 +1,10 @@
 <script>
   import { Router, Route } from "svelte-routing";
-  import LandingPage from "./routes/LandingPage.svelte";
-  import LoginPage from "./routes/Login.svelte";
-  import Services from "./routes/Services.svelte";
-  import DateTime from "./routes/Booking.svelte";
-  import AdminPage from "./routes/AdminPage.svelte";
+  import LandingPage from "./pages/LandingPage.svelte";
+  import LoginPage from "./pages/Login.svelte";
+  import Services from "./pages/Services.svelte";
+  import DateTime from "./pages/Booking.svelte";
+  import AdminPage from "./pages/AdminPage.svelte";
 </script>
 
 <Router>
