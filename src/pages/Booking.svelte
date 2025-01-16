@@ -1,30 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { cartStore } from "../stores/cart";
   import { navigate } from "svelte-routing";
   import { submitBooking } from "../utils/api";
-  import type { ServiceItem, Contact } from "../types/types";
+  import type { Contact } from "../types/types";
   import ContactForm from "../components/ContactForm.svelte";
   import DateTimePicker from "../components/DateTimePicker.svelte";
   import "../styles/booking.css";
 
-  let selectedServices: ServiceItem[] = [];
   let contact: Contact = { name: "", email: "", phone: "" };
   let date: string = "";
   let time: string = "";
 
-  onMount(() => {
-    const state = history.state;
-    if (state?.selectedServices) {
-      selectedServices = state.selectedServices;
-      console.log("Received Services:", selectedServices);
-    } else {
-      console.error(
-        "No selected services received. Redirecting to Services page."
-      );
-      alert("Please select services first.");
-      navigate("/services");
-    }
-  });
+  // Use $cartStore directly for selected services
+  $: selectedServices = $cartStore;
 
   const handleSubmit = async () => {
     if (!date || !time || !contact.name || !contact.email || !contact.phone) {
@@ -41,8 +29,14 @@
       customer_email: contact.email,
     };
 
-    await submitBooking(bookingData);
-    navigate("/");
+    try {
+      await submitBooking(bookingData);
+      alert("Booking successfully submitted!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      alert("An error occurred while submitting the booking.");
+    }
   };
 </script>
 
@@ -53,7 +47,7 @@
 
 <h2>Selected Services</h2>
 <ul>
-  {#each selectedServices as service}
+  {#each $cartStore as service}
     <li>{service.name} - ${service.price}</li>
   {/each}
 </ul>

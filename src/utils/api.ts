@@ -1,5 +1,5 @@
 // AdminPage
-import type { Booking, ServiceItem } from "../types/types"; // Import Booking as a type
+import type { Booking, ServiceItem } from "../types/types"; 
 
 export const fetchBookings = async (): Promise<{ bookings: Booking[] }> => {
   const token: string | null = localStorage.getItem("token");
@@ -23,7 +23,7 @@ export const fetchBookings = async (): Promise<{ bookings: Booking[] }> => {
 
 // Booking
 export const submitBooking = async (bookingData: any): Promise<void> => {
-  console.log("Submitting booking:", bookingData); // Debug log
+  console.log("Submitting booking:", bookingData); 
 
   try {
     const response = await fetch("http://localhost:5002/api/bookings", {
@@ -65,13 +65,13 @@ export const login = async (email: string, password: string): Promise<string> =>
 
 // Services
 export const fetchServices = async (): Promise<ServiceItem[]> => {
-  const response = await fetch("http://localhost:5002/api/services"); // Adjust URL if needed
+  const response = await fetch("http://localhost:5002/api/services"); 
 
   if (!response.ok) {
     throw new Error("Failed to fetch services");
   }
 
-  return await response.json(); // Return the parsed JSON response
+  return await response.json(); 
 };
 
 

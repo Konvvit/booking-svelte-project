@@ -1,7 +1,6 @@
 <script lang="ts">
   import { navigate } from "svelte-routing";
   import { login } from "../utils/api";
-  import "../styles/login.css";
 
   let email: string = "";
   let password: string = "";
